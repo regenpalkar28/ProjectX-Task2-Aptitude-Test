@@ -130,5 +130,6 @@ def cluster_axis(values, threshold=30):
     return clusters
 
 solid_detector(pattern1)
+# solid_detector(pattern2)
 cv.waitKey(0)
 cv.destroyAllWindows()
