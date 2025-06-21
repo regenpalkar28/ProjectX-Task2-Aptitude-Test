@@ -12,11 +12,13 @@ However, on applying BITWISE OR on red blue and green resulted in these images:
 
 
  ![1](https://github.com/user-attachments/assets/c6a2c057-80fc-4e57-b840-0a75864d00bd)
+ 
  BITWISE OR on RGB for testcase 1 (pattern1)
 
 
  
  ![1](https://github.com/user-attachments/assets/dcb6825b-71af-4e19-bacd-9b688f1fb9d5)
+ 
  BITWISE OR on RGB for testcase 2 (pattern2)
 
 Here a very obvious pattern is emerging. 
@@ -86,6 +88,8 @@ Then we define label as the final row/column, or number/alphabet combination whe
 
 For better visibility, we add a black dot at the centroid of the solid shapes; and add the label of that point near the point.
 We also print the labels in the terminal.
+
+
 ![1](https://github.com/user-attachments/assets/60b54067-0603-4a92-9d34-65e07d3bf239)
 ![image](https://github.com/user-attachments/assets/0c9d996a-6306-461d-a845-e5b6f40fdd9f)
 
