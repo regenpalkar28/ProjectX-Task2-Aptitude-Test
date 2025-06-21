@@ -68,7 +68,7 @@ def solid_detector(image):
 
     threshed[:70, :] = 0
     threshed[:, :50] = 0
-
+    # cv.imshow("threshed",threshed)
     contours, _ = cv.findContours(threshed, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
     print(f"No. of contours detected: {len(contours)}")
 
@@ -83,7 +83,6 @@ def solid_detector(image):
         mask = np.zeros(gray.shape, dtype=np.uint8)
         cv.drawContours(mask, [contour], -1, 255, cv.FILLED)
         pixels_inside_contour = cv.countNonZero(cv.bitwise_and(threshed, mask))
-        # cv.imshow("threshed" ,threshed)
 
         solidity_threshold = 0.85
         if pixels_inside_contour / area > solidity_threshold:
@@ -94,18 +93,18 @@ def solid_detector(image):
                 solid_centers.append((cx, cy))  
                 cv.circle(display_image, (cx, cy), 4, (0, 0, 0), -1)
 
-    x_clusters = cluster_axis([cx for cx, cy in solid_centers])
-    y_clusters = cluster_axis([cy for cx, cy in solid_centers])
+    x_clusters = group_centroid([cx for cx, cy in solid_centers])
+    y_clusters = group_centroid([cy for cx, cy in solid_centers])
 
     col_labels = [chr(ord('A') + i) for i in range(len(x_clusters))]  # A, B, C...
     row_labels = list(range(1, len(y_clusters) + 1))  # 1, 2, 3...
 
     for cx, cy in solid_centers:
-        col_idx = np.argmin([abs(cx - x) for x in x_clusters])
-        row_idx = np.argmin([abs(cy - y) for y in y_clusters])
+        col_id = np.argmin([abs(cx - x) for x in x_clusters])
+        row_id = np.argmin([abs(cy - y) for y in y_clusters])
 
-        col = col_labels[col_idx]
-        row = row_labels[row_idx]
+        col = col_labels[col_id]
+        row = row_labels[row_id]
         label = f"{row}{col}"
 
         cv.putText(display_image, label, (cx + 10, cy), cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
@@ -114,7 +113,7 @@ def solid_detector(image):
     print(f"Total solid dots: {len(solid_centers)}")
     cv.imshow("Number-Letter combo identified ", display_image)
 
-def cluster_axis(values, threshold=30):
+def group_centroid(values, threshold=30):
     values = sorted(values)
     clusters = []
     temp = []
