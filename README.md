@@ -1,5 +1,9 @@
 # ProjectX-Task2-Aptitude-Test
 
+
+[O/P AT THE VERY END OF THIS DOCUMENT] 
+
+
 In this task, we were given several images in each testcase {namely Raghav, Ganshyam, Bhaskar, Yash, Om/Omkar and Chintan which corresponded to the colors red, green, blue, yellow, orange and cyan.
 
 It's mentioned in the description of the task that Raghav, Ganshyam and Bhaskar are very close friends which hints that the task has something to do with the red, blue and green (RGB) images.
@@ -8,10 +12,11 @@ However, on applying BITWISE OR on red blue and green resulted in these images:
 
 
  ![1](https://github.com/user-attachments/assets/c6a2c057-80fc-4e57-b840-0a75864d00bd)
- 
  BITWISE OR on RGB for testcase 1 (pattern1)
- ![1](https://github.com/user-attachments/assets/dcb6825b-71af-4e19-bacd-9b688f1fb9d5)
+
+
  
+ ![1](https://github.com/user-attachments/assets/dcb6825b-71af-4e19-bacd-9b688f1fb9d5)
  BITWISE OR on RGB for testcase 2 (pattern2)
 
 Here a very obvious pattern is emerging. 
@@ -41,11 +46,15 @@ We find the area of each contour, and if it is too small ( in particular less th
 Then we create a mask, with the dimensions of the threshed / grayscale image (theyre the same dimensions). This mask will be a blank image, which will be used to isolate the area inside the current contour. Then we draw the contour on the mask, and fill the interior of it with white. Then we perform a BITWISE AND of the threshed image and the mask to isolate the white pixels that present in both the mask and the threshed image. 
 
 Example of one contour : 
+
+
 ![1](https://github.com/user-attachments/assets/14305e52-8b78-4978-b582-b8377619c901)
 
 Then we count how many white pixels are present in the intersection of threshed and the mask. This is a crucial step in determining whether a contour is an outline or a solid. If the ratio of the pixel count and the area is greater than 0.85 {this 0.85 is denoted as the **solidity_threshold**} , then that contour is determined as a SOLID and its centroid is calculated. These centroid coordinates are appended in the solid_centers list that we created earlier.
 
 Now we notice that some of the centers of the solid shapes ( cx , cy ) are in the same column/ row but their x coordinates (for points in same column) and their y coordinates (for points in the same row) are not exactly equal. 
+
+
 ![1](https://github.com/user-attachments/assets/8f39356b-c44c-4bf5-b76b-90f1845909f3)
 
 points being in the same column but not having exact same x coordinates 
@@ -84,3 +93,5 @@ We also print the labels in the terminal.
 ![1](https://github.com/user-attachments/assets/079ae7ff-c461-445e-bdce-ff7795a9fa46)
 ![image](https://github.com/user-attachments/assets/59d07e3d-b7ee-4a2a-b94a-ec74f69b0e49)
 
+
+Thus we have successfully found the hidden logic of the test.
